@@ -12,11 +12,15 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.security.SecureRandom;
+import java.util.Random;
 import java.util.Timer;
 
 import static edu.lexaron.simulation.WorldPainter.paintWorld;
@@ -53,6 +57,7 @@ public class CellSIM extends Application {
     stats.setSpacing(20);
 
 
+    final Random GLOBAL_RANDOM    = new SecureRandom();
 
     VBox sp = new VBox(new Button("LEGEND"));
     sp.setPadding(new Insets(20));
@@ -73,12 +78,12 @@ public class CellSIM extends Application {
     Label totalSugar = new Label();
     totalSugar.getStyleClass().addAll("bigText", "whiteText");
     // endregion
-    Engine engine = new Engine(infoPanel, counter, liveCells, deadCells, totalCells, totalSugar);
 
+
+    Engine engine = new Engine(infoPanel, counter, liveCells, deadCells, totalCells, totalSugar);
     Label sugarFactor_L = new Label("Initial sugar factor: " + String.valueOf(engine.getSugarFactor()) + "%");
     Canvas canvas = new Canvas((double) (engine.getWidth() * 5), (double) (engine.getHeight() * 5));
-//    StackPane spc = new StackPane(canvas);
-//    spc.setAlignment(Pos.CENTER);
+
     Button start = new Button("Start");
     start.setOnAction(e -> {
       engine.startThread(canvas, new Timer());
@@ -87,10 +92,23 @@ public class CellSIM extends Application {
     });
     Button generateWorld = new Button("Spawn new cells & reset sugar");
     generateWorld.setOnAction(e -> {
-      engine.generateWorld(true, canvas);
+      engine.generateWorld(true, canvas, GLOBAL_RANDOM.nextInt(100));
       paintWorld(engine.getWorld(), canvas);
-
     });
+
+    final Spinner<Integer> sugarFactorSpinner = new Spinner<>();
+    sugarFactorSpinner.setEditable(true);
+    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory
+        .IntegerSpinnerValueFactory(1, 99, GLOBAL_RANDOM.nextInt(100));
+    sugarFactorSpinner.setValueFactory(valueFactory);
+
+    Button generateWorldWithDefinedSugar = new Button("Reset World with defined sugar factor");
+    generateWorldWithDefinedSugar.setOnAction(e -> {
+      engine.generateWorld(true, canvas, sugarFactorSpinner.getValue());
+      paintWorld(engine.getWorld(), canvas);
+    });
+
+
     // STRUCTURING
     menuRow1.getChildren().addAll(
         sugarFactor_L,
@@ -104,14 +122,16 @@ public class CellSIM extends Application {
     );
     stats.getChildren().addAll(
         start,
-        generateWorld
+        generateWorld,
+        generateWorldWithDefinedSugar,
+        sugarFactorSpinner
     );
     menu.getChildren().addAll(
         menuRow1,
         stats
     );
 
-    engine.generateWorld(false, canvas);
+    engine.generateWorld(false, canvas, GLOBAL_RANDOM.nextInt(100));
 
     root.setTop(menu);
     root.setCenter(canvas);

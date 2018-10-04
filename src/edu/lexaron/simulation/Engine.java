@@ -129,7 +129,7 @@ public class Engine {
     return sugarFactor;
   }
 
-  void generateWorld(boolean cellsToo, Canvas canvas) {
+  void generateWorld(boolean cellsToo, Canvas canvas, double sugarFactor) {
     world.generateWorld(sugarFactor);
     canvas.getGraphicsContext2D().clearRect(0.0, 0.0, canvas.getWidth(), canvas.getHeight());
     if (cellsToo) {

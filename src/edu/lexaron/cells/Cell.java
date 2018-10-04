@@ -280,9 +280,9 @@ public abstract class Cell {
 
   // Take a random step; avoid opposite direction of last step
   void randomStep(World w) {
-    int roll = RANDOM.nextInt(directionList.size() + 1);
+    int roll = RANDOM.nextInt(directionList.size());
     while (roll == oppositeRandomStep && roll == lastRandomStep) {
-      roll = RANDOM.nextInt(directionList.size() + 1);
+      roll = RANDOM.nextInt(directionList.size());
     }
     oppositeRandomStep = directionList.size() - 1 - roll;
     lastRandomStep = roll;
