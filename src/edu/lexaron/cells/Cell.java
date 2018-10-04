@@ -8,9 +8,7 @@ import edu.lexaron.world.World;
 import javafx.scene.image.Image;
 
 import java.security.SecureRandom;
-import java.util.ArrayDeque;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
 
 /**
  *
@@ -28,12 +26,15 @@ public abstract class Cell {
   private static final Random RANDOM    = new SecureRandom();
   private static final double BIRTH_REQ = 100.0;
   private static final int    OFFSPRING_LIMIT = 3;
+  private static final List<Direction> directionList = new ArrayList<>(EnumSet.allOf(Direction.class));
+
   private final int               movement;
   private final String            geneCode;
   private final Queue<Direction>  path;
 
   private boolean alive;
-  private int    x, y, vision, trailSize, offspring, oppositeRandomStep, lastRandomStep;
+  private int    x, y, vision, trailSize, offspring, range, oppositeRandomStep, lastRandomStep;
+  private Direction idleDirection;
   private double energy, speed, efficiency, biteSize;
   private Location food = null;
 
@@ -60,6 +61,8 @@ public abstract class Cell {
     this.movement   = 1;
     this.speed      = speed;
     this.efficiency = efficiency;
+    this.idleDirection = directionList.get(RANDOM.nextInt(directionList.size() -1));
+    this.range      = 20; // TODO: make child class property
     if (energy > 0.0) {
       this.alive = true;
     }
@@ -119,8 +122,14 @@ public abstract class Cell {
     upkeep(world);
     if (alive) {
       doHunt(world);
-      if (path.isEmpty() && food == null) { // todo Mirza :transform into organic wandering
-        move(world, Direction.DOWN_LEFT);
+      if (path.isEmpty() && food == null) { // todo LL :transform into organic wandering
+//        int rangeRand = RANDOM.nextInt(directionList.size() - 1);
+//        int c = range;
+//        while (c > 0) {
+//          move(world, directionList.get(rangeRand));
+//          c -= 1;
+//        }
+        move(world, idleDirection);
         randomStep(world);
       }
     }
@@ -269,38 +278,15 @@ public abstract class Cell {
     }
   }
 
+  // Take a random step; avoid opposite direction of last step
   void randomStep(World w) {
-    int roll = RANDOM.nextInt(5);
+    int roll = RANDOM.nextInt(directionList.size() + 1);
     while (roll == oppositeRandomStep && roll == lastRandomStep) {
-      roll = RANDOM.nextInt(5);
+      roll = RANDOM.nextInt(directionList.size() + 1);
     }
-    switch (roll) {
-      case 0:
-        oppositeRandomStep = 2;
-        lastRandomStep = 0;
-        move(w, Direction.UP);
-        break;
-      case 1:
-        oppositeRandomStep = 3;
-        lastRandomStep = 1;
-//        moveRight(w);
-        move(w, Direction.RIGHT);
-        break;
-      case 2:
-        oppositeRandomStep = 0;
-        lastRandomStep = 2;
-//        moveDown(w);
-        move(w, Direction.DOWN);
-        break;
-      case 3:
-        oppositeRandomStep = 1;
-        lastRandomStep = 3;
-//        moveLeft(w);
-        move(w, Direction.LEFT);
-        break;
-      case 4:
-        break;
-    }
+    oppositeRandomStep = directionList.size() - 1 - roll;
+    lastRandomStep = roll;
+    move(w, directionList.get(roll));
   }
 
   @SuppressWarnings ({"ImplicitNumericConversion", "ProhibitedExceptionCaught"})
