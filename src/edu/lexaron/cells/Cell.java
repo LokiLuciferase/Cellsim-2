@@ -35,7 +35,13 @@ public abstract class Cell {
   private boolean alive;
   private int    x, y, vision, trailSize, offspring, range, oppositeRandomStep, lastRandomStep;
   private Direction idleDirection;
-  private double energy, speed, efficiency, biteSize;
+  private double energy;
+  private double speed;
+  private double efficiency;
+  private double biteSize;
+  private double mutationStepSizeMultiplier;
+  private double mutationRate = 1;  // TODO: always mutate, for now
+  private double deleteriousMutationRate = 0.5;
   private Location food = null;
 
   /**
@@ -49,9 +55,11 @@ public abstract class Cell {
    * @param speed       initial speed, determines how fast the {@link Cell} uses it's {@link Cell#path}
    * @param efficiency  initial efficiency, determines how much energy a {@link Cell} expends for each action it takes
    * @param biteSize    initial size of bite, determines how fast the {@link Cell} consumes it's food source
+   * @param mutationStepSizeMultiplier initial mutation rate (determines step size upon adaption)
    */
   @SuppressWarnings ({"UnnecessaryThis"})
-  protected Cell(String id, int x, int y, double energy, int vision, double speed, double efficiency, double biteSize) {
+  protected Cell(String id, int x, int y, double energy, int vision,
+                 double speed, double efficiency, double biteSize, double mutationStepSizeMultiplier) {
     this.path = new ArrayDeque<>();
     this.geneCode = id;
     this.x = x;
@@ -68,6 +76,7 @@ public abstract class Cell {
     }
     this.trailSize = 50;
     this.biteSize = biteSize;
+    this.mutationStepSizeMultiplier = mutationStepSizeMultiplier;
   }
 
   /**
@@ -105,7 +114,9 @@ public abstract class Cell {
       Location birthPlace = findBirthplace(world);
       Cell child = doGiveBirth(birthPlace.getX(), birthPlace.getY());
       child.inheritFrom(this);
-      child.evolve();
+      if ((double) RANDOM.nextInt(100) / 100 <= mutationRate){
+        child.evolve();
+      }
       world.getNewBornCells().add(child);
       offspring += 1;
       energy /= 3.0;
@@ -122,13 +133,7 @@ public abstract class Cell {
     upkeep(world);
     if (alive) {
       doHunt(world);
-      if (path.isEmpty() && food == null) { // todo LL :transform into organic wandering
-//        int rangeRand = RANDOM.nextInt(directionList.size() - 1);
-//        int c = range;
-//        while (c > 0) {
-//          move(world, directionList.get(rangeRand));
-//          c -= 1;
-//        }
+      if (path.isEmpty() && food == null) {
         move(world, idleDirection);
         randomStep(world);
       }
@@ -181,6 +186,13 @@ public abstract class Cell {
   public final int getVision() {
     return vision;
   }
+
+  /**
+   * Determines a {@link Cell}'s step maginude during evolution.
+   *
+   * @return this {@link Cell}'s step magnitude during evolution.
+   */
+  public final double getMutationRate() { return mutationRate; }
 
   /**
    * Determines how fast a {@link Cell} uses it's path.
@@ -366,23 +378,31 @@ public abstract class Cell {
   }
 
   private void evolve() {
-    switch (RANDOM.nextInt(5)) {
+    Boolean isDeleterious = RANDOM.nextInt(10) < 10 * deleteriousMutationRate;
+    double fuzzFactor = RANDOM.nextGaussian();
+    if (fuzzFactor < 0) {fuzzFactor *= -1;}
+    fuzzFactor += 1;
+    fuzzFactor /= 20;
+    fuzzFactor += 1; //TODO: fix this mess
+    switch (RANDOM.nextInt(6)) {
       case 0:
-        mutateVision();
+        mutateVision(isDeleterious, fuzzFactor);
         break;
       case 1:
-        mutateEfficiency();
+        mutateEfficiency(isDeleterious, fuzzFactor);
         break;
       case 2:
-        mutateSpeed();
+        mutateSpeed(isDeleterious, fuzzFactor);
         break;
       case 3:
-        mutateTrailSize();
+        mutateTrailSize(isDeleterious, fuzzFactor);
         break;
       case 4:
-        mutateBiteSize();
+        mutateBiteSize(isDeleterious, fuzzFactor);
         break;
-
+      case 5:
+        mutateMutationStepSizeMultiplier(isDeleterious, fuzzFactor);
+        break;
     }
   }
 
@@ -392,6 +412,7 @@ public abstract class Cell {
     speed       = parent.getSpeed();
     efficiency  = parent.getEfficiency();
     biteSize    = parent.getBiteSize();
+    mutationRate = parent.getMutationRate();
   }
 
   private void upkeep(World w) {
@@ -407,26 +428,63 @@ public abstract class Cell {
     world.getWorld()[y][x].setCell(null);
   }
 
-  private void mutateVision() {
-    vision++;
+  // TODO: let vision evolve in other increments dependent on mutationRate
+  private void mutateVision(Boolean isDeleterious, double fuzzFactor) {
+    double baseVisionChange = 1;
+    int cumulativeVisionChange = (int) Math.round(baseVisionChange * mutationStepSizeMultiplier * fuzzFactor);
+    if (isDeleterious) {
+      vision -= cumulativeVisionChange;
+    } else {
+      vision += cumulativeVisionChange;
+    }
+    if (vision < 1) { vision = 1; }
   }
 
-  private void mutateEfficiency() {
-    efficiency *= 0.95;
-  }
-
-  private void mutateSpeed() {
-    speed += 0.25;
-  }
-
-  private void mutateTrailSize() {
-    if ((trailSize - 2) > 2) {
-      trailSize -= 2;
+  private void mutateEfficiency(Boolean isDeleterious, double fuzzFactor) {
+    double baseEfficiencyChange = 1.05;
+    double cumulativeEfficiencyChange = baseEfficiencyChange * mutationStepSizeMultiplier * fuzzFactor;
+    System.out.println(cumulativeEfficiencyChange);
+    if (isDeleterious) {
+      efficiency *= cumulativeEfficiencyChange;
+    } else {
+      efficiency /= cumulativeEfficiencyChange;
     }
   }
 
-  private void mutateBiteSize() {
-    biteSize *= 1.05;
+  private void mutateSpeed(Boolean isDeleterious, double fuzzFactor) {
+    double baseSpeedChange = 0.25;
+    double cumulativeSpeedChange = baseSpeedChange * mutationStepSizeMultiplier * fuzzFactor;
+    if (isDeleterious) {
+      speed -= cumulativeSpeedChange;
+    } else {
+      speed += cumulativeSpeedChange;
+    }
+    if (speed <= 0.01 ) { speed = 0.01; }
+  }
+
+  private void mutateTrailSize(Boolean isDeleterious, double fuzzFactor) {
+    double baseTrailSizeChange = 1;
+    int cumulativeTrailSizeChange = (int) Math.round(baseTrailSizeChange * mutationStepSizeMultiplier * fuzzFactor);
+    if (isDeleterious) {
+      trailSize -= cumulativeTrailSizeChange;
+    } else {
+      trailSize += cumulativeTrailSizeChange;
+    }
+    if (trailSize < 2) {trailSize = 2;}
+  }
+
+  private void mutateBiteSize(Boolean isDeleterious, double fuzzFactor) {
+    double baseBiteSizeChange = 1.05;
+    double cumulativeBiteSizeChange = baseBiteSizeChange * mutationStepSizeMultiplier * fuzzFactor;
+    if (isDeleterious) {
+      biteSize /= cumulativeBiteSizeChange;
+    } else {
+      biteSize *= cumulativeBiteSizeChange;
+    }
+  }
+
+  private void mutateMutationStepSizeMultiplier(Boolean isDeleterious, double fuzzFactor) {
+    mutationStepSizeMultiplier *= 1.05;
   }
 
 }

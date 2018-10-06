@@ -81,7 +81,6 @@ public class CellSIM extends Application {
 
 
     Engine engine = new Engine(infoPanel, counter, liveCells, deadCells, totalCells, totalSugar);
-    Label sugarFactor_L = new Label("Initial sugar factor: " + String.valueOf(engine.getSugarFactor()) + "%");
     Canvas canvas = new Canvas((double) (engine.getWidth() * 5), (double) (engine.getHeight() * 5));
 
     Button start = new Button("Start");
@@ -111,9 +110,6 @@ public class CellSIM extends Application {
 
     // STRUCTURING
     menuRow1.getChildren().addAll(
-        sugarFactor_L,
-        new Label("World Size: " + engine.getWorld().getHeight() + "x" + engine.getWorld().getWidth()),
-        new Label("No. of Tiles: " + (engine.getWorld().getHeight() * engine.getWorld().getWidth())),
         counter,
         liveCells,
         deadCells,

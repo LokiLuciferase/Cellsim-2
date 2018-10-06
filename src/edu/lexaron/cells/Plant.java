@@ -27,8 +27,8 @@ abstract class Plant extends Cell {
    * @param efficiency initial efficiency, determines how much energy a {@link Cell} expends for each action it takes
    * @param biteSize   initial size of bite, determines how fast the {@link Cell} consumes it's food source
    */
-  Plant(String id, int x, int y, double energy, int vision, double speed, double efficiency, double biteSize) {
-    super(id, x, y, energy, vision, speed, efficiency, biteSize);
+  Plant(String id, int x, int y, double energy, int vision, double speed, double efficiency, double biteSize, double mutationStepSizeMultiplier) {
+    super(id, x, y, energy, vision, speed, efficiency, biteSize, mutationStepSizeMultiplier);
   }
 
   @SuppressWarnings ("MethodDoesntCallSuperMethod")

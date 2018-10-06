@@ -17,8 +17,8 @@ abstract class Herbivorous extends Cell {
    * @param y          vertical coordinate of birth location
    */
   @SuppressWarnings ("MagicNumber")
-  Herbivorous(String id, int x, int y) {
-    super(id, x, y, 50.0, 3, 1.0, 1.0, 1.0);
+  Herbivorous(String id, int x, int y, double energy, int vision, double speed, double efficiency, double biteSize, double mutationStepSizeMultiplier) {
+    super(id, x, y, energy, vision, speed, efficiency, biteSize, mutationStepSizeMultiplier);
   }
 
   @Override

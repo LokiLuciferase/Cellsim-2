@@ -16,7 +16,7 @@ public class HuntClosest extends Herbivorous {
   private static final Image GFX = new Image("edu/lexaron/gfx/huntClosest.png");
 
   private HuntClosest(String id, int x, int y) {
-    super(id, x, y);
+    super(id, x, y, 50.0, 3, 1.0, 1.0, 1.0, 1.05);
   }
 
   /**
