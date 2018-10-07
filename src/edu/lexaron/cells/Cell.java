@@ -40,8 +40,8 @@ public abstract class Cell {
   private double efficiency;
   private double biteSize;
   private double mutationStepSizeMultiplier;
-  private double mutationRate = 1;  // TODO: always mutate, for now
-  private double deleteriousMutationRate = 0.5;
+  private double mutationRate = 1;  // TODO: always mutate something, for now. Maybe mutate all at same time?
+  private double deleteriousMutationRate = 0.8;
   private Location food = null;
 
   /**
@@ -192,7 +192,7 @@ public abstract class Cell {
    *
    * @return this {@link Cell}'s step magnitude during evolution.
    */
-  public final double getMutationRate() { return mutationRate; }
+  public final double getMutationStepSizeMultiplier() { return mutationStepSizeMultiplier; }
 
   /**
    * Determines how fast a {@link Cell} uses it's path.
@@ -384,7 +384,7 @@ public abstract class Cell {
     fuzzFactor += 1;
     fuzzFactor /= 20;
     fuzzFactor += 1; //TODO: fix this mess
-    switch (RANDOM.nextInt(6)) {
+    switch (RANDOM.nextInt(5)) {  // do not allow increasing of step size multiplier
       case 0:
         mutateVision(isDeleterious, fuzzFactor);
         break;
@@ -412,7 +412,7 @@ public abstract class Cell {
     speed       = parent.getSpeed();
     efficiency  = parent.getEfficiency();
     biteSize    = parent.getBiteSize();
-    mutationRate = parent.getMutationRate();
+    mutationStepSizeMultiplier = parent.getMutationStepSizeMultiplier();
   }
 
   private void upkeep(World w) {
@@ -443,7 +443,6 @@ public abstract class Cell {
   private void mutateEfficiency(Boolean isDeleterious, double fuzzFactor) {
     double baseEfficiencyChange = 1.05;
     double cumulativeEfficiencyChange = baseEfficiencyChange * mutationStepSizeMultiplier * fuzzFactor;
-    System.out.println(cumulativeEfficiencyChange);
     if (isDeleterious) {
       efficiency *= cumulativeEfficiencyChange;
     } else {
@@ -484,7 +483,7 @@ public abstract class Cell {
   }
 
   private void mutateMutationStepSizeMultiplier(Boolean isDeleterious, double fuzzFactor) {
-    mutationStepSizeMultiplier *= 1.05;
+    mutationStepSizeMultiplier *= 1.5;
   }
 
 }

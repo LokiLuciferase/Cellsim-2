@@ -1,32 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ade66b26-1cbd-491f-bc88-3df0aa2fa8c3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/CellSIM.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/CellSIM1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/CellSIM2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/CellSIM3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/junit_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_netbeans_modules_java_j2seproject_copylibstask.xml" beforeDir="false" />
+    <list default="true" id="ade66b26-1cbd-491f-bc88-3df0aa2fa8c3" name="Default Changelist" comment="homogenize cell constructors and add basis for more complex evolution system">
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/R_User_Library.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/lexaron/cells/Carnivorous.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/lexaron/cells/Carnivorous.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/lexaron/cells/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/lexaron/cells/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/lexaron/cells/Herbivorous.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/lexaron/cells/Herbivorous.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/lexaron/cells/HuntClosest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/lexaron/cells/HuntClosest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/lexaron/cells/HuntFirst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/lexaron/cells/HuntFirst.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/lexaron/cells/HuntMax.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/lexaron/cells/HuntMax.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/lexaron/cells/Leech.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/lexaron/cells/Leech.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/lexaron/cells/Plant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/lexaron/cells/Plant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/lexaron/cells/Spider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/lexaron/cells/Spider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/lexaron/cells/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/lexaron/cells/Tree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/lexaron/cells/Vulture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/lexaron/cells/Vulture.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/lexaron/simulation/CellSIM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/lexaron/simulation/CellSIM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/lexaron/simulation/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/lexaron/simulation/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/lexaron/simulation/Monitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/lexaron/simulation/Monitor.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,45 +23,126 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/Cellsim_2$CellSIM.ic" NAME="CellSIM Coverage Results" MODIFIED="1538908583308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>edu.lexaron.simulation.*</FILTER>
+    </SUITE>
+  </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-1255838556">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="css" value="1" />
-          <entry key="java" value="30" />
+          <entry key="css" value="2" />
+          <entry key="java" value="37" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="1" />
-          <entry key="JAVA" value="30" />
+          <entry key="CSS" value="2" />
+          <entry key="JAVA" value="37" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="2998" />
+          <entry key="css" value="4" />
+          <entry key="java" value="4102" />
+          <entry key="txt" value="86" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2998" />
+          <entry key="CSS" value="4" />
+          <entry key="JAVA" value="4102" />
+          <entry key="PLAIN_TEXT" value="86" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/lexaron/cells/Cell.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="510">
-              <caret line="484" lean-forward="true" selection-start-line="484" selection-end-line="484" />
+              <caret line="42" column="109" selection-start-line="42" selection-start-column="109" selection-end-line="42" selection-end-column="109" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/lexaron/simulation/CellSIM.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1515">
+              <caret line="119" column="17" lean-forward="true" selection-start-line="119" selection-start-column="17" selection-end-line="119" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#4351#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/style/style.css">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/lexaron/cells/Vulture.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+              <folding>
+                <element signature="e#579#580#0" expanded="true" />
+                <element signature="e#636#637#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/lexaron/simulation/Engine.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1440">
+              <caret line="119" column="5" lean-forward="true" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/lexaron/simulation/Monitor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="28">
+              <caret line="88" column="83" lean-forward="true" selection-start-line="88" selection-start-column="83" selection-end-line="88" selection-end-column="83" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/lexaron/world/Sugar.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="88">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/lexaron/world/World.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-480">
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+              <folding>
+                <element signature="e#2869#2870#0" expanded="true" />
+                <element signature="e#2894#2895#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,6 +157,15 @@
       <find>bool</find>
       <find>deleterious</find>
       <find>fuzzFactor</find>
+      <find>primaryStage</find>
+      <find>vB</find>
+      <find>box</find>
+      <find>root</find>
+      <find>stage</find>
+      <find>Stage</find>
+      <find>GridPane</find>
+      <find>getMutation</find>
+      <find>canvas</find>
     </findStrings>
     <replaceStrings>
       <replace>Boolean</replace>
@@ -100,8 +178,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/edu/lexaron/simulation/CellSIM.java" />
-        <option value="$PROJECT_DIR$/src/edu/lexaron/cells/Vulture.java" />
         <option value="$PROJECT_DIR$/src/edu/lexaron/cells/HuntClosest.java" />
         <option value="$PROJECT_DIR$/src/edu/lexaron/cells/HuntFirst.java" />
         <option value="$PROJECT_DIR$/src/edu/lexaron/cells/HuntMax.java" />
@@ -111,6 +187,11 @@
         <option value="$PROJECT_DIR$/src/edu/lexaron/cells/Carnivorous.java" />
         <option value="$PROJECT_DIR$/src/edu/lexaron/cells/Herbivorous.java" />
         <option value="$PROJECT_DIR$/src/edu/lexaron/cells/Plant.java" />
+        <option value="$PROJECT_DIR$/src/edu/lexaron/cells/Vulture.java" />
+        <option value="$PROJECT_DIR$/src/style/style.css" />
+        <option value="$PROJECT_DIR$/src/edu/lexaron/simulation/Engine.java" />
+        <option value="$PROJECT_DIR$/src/edu/lexaron/simulation/CellSIM.java" />
+        <option value="$PROJECT_DIR$/src/edu/lexaron/simulation/Monitor.java" />
         <option value="$PROJECT_DIR$/src/edu/lexaron/cells/Cell.java" />
       </list>
     </option>
@@ -122,6 +203,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="961" />
     <option name="width" value="959" />
     <option name="height" value="1052" />
   </component>
@@ -130,9 +212,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -189,19 +270,20 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538866283649" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538910305071" />
     <property name="last_opened_file_path" value="$USER_HOME$/coding/java" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -219,6 +301,7 @@
     <configuration name="CellSIM" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.lexaron.simulation.CellSIM" />
       <module name="Cellsim-2" />
+      <option name="VM_PARAMETERS" value="-Dprism.forceGPU=true -Xmx4G" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="edu.lexaron.simulation.*" />
@@ -242,51 +325,61 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1538858289626</updated>
-      <workItem from="1538858291861" duration="7953000" />
+      <workItem from="1538858291861" duration="8111000" />
+      <workItem from="1538903049236" duration="7252000" />
     </task>
+    <task id="LOCAL-00001" summary="homogenize cell constructors and add basis for more complex evolution system">
+      <created>1538866388443</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1538866388443</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7953000" />
+    <option name="totallyTimeSpent" value="15363000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="UI Designer" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info id="Capture Tool" />
-      <window_info id="Designer" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1189968" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22465315" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" weight="0.32938644" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Docker" />
-      <window_info anchor="bottom" id="GitLabIntegration" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.15500538" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.17330463" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="R Packages" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Remote Host" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="R Graphics" />
-      <window_info anchor="right" id="Maven Projects" />
-      <window_info anchor="right" id="SciView" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32938644" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="12" />
+      <window_info anchor="bottom" id="GitLabIntegration" order="13" />
+      <window_info anchor="right" id="Coverage" side_tool="true" weight="0.32968238" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="R Packages" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Remote Host" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="R Graphics" order="7" />
+      <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info anchor="right" id="SciView" order="9" />
+      <window_info anchor="right" id="Database" order="10" />
+      <window_info anchor="right" id="Palette&#9;" order="11" />
+      <window_info anchor="right" id="Theme Preview" order="12" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -295,42 +388,11 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="homogenize cell constructors and add basis for more complex evolution system" />
+    <option name="LAST_COMMIT_MESSAGE" value="homogenize cell constructors and add basis for more complex evolution system" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/style/style.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/lexaron/simulation/Engine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1094">
-          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/lexaron/simulation/CellSIM.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-953">
-          <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/lexaron/world/World.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1355">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding>
-            <element signature="e#2869#2870#0" expanded="true" />
-            <element signature="e#2894#2895#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/lexaron/simulation/Monitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-495">
-          <caret line="29" column="6" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/lexaron/simulation/Life.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -373,17 +435,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="27" column="91" selection-start-line="27" selection-start-column="91" selection-end-line="27" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/lexaron/cells/Vulture.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="19" column="50" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
-          <folding>
-            <element signature="e#579#580#0" expanded="true" />
-            <element signature="e#633#634#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -437,10 +488,73 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/lexaron/cells/Vulture.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+          <folding>
+            <element signature="e#579#580#0" expanded="true" />
+            <element signature="e#636#637#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/style/style.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/lexaron/simulation/WorldPainter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/lexaron/world/Sugar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/lexaron/world/World.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-480">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding>
+            <element signature="e#2869#2870#0" expanded="true" />
+            <element signature="e#2894#2895#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/lexaron/simulation/Engine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="119" column="5" lean-forward="true" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/lexaron/simulation/Monitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="88" column="83" lean-forward="true" selection-start-line="88" selection-start-column="83" selection-end-line="88" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/lexaron/simulation/CellSIM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1515">
+          <caret line="119" column="17" lean-forward="true" selection-start-line="119" selection-start-column="17" selection-end-line="119" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#4351#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/lexaron/cells/Cell.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
-          <caret line="484" lean-forward="true" selection-start-line="484" selection-end-line="484" />
+          <caret line="42" column="109" selection-start-line="42" selection-start-column="109" selection-end-line="42" selection-end-column="109" />
         </state>
       </provider>
     </entry>

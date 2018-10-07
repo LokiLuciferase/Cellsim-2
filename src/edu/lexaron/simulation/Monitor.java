@@ -54,7 +54,7 @@ class Monitor {
           Label avgEfficiency_L = new Label("Eff.: " + df.format(breedPopulations.get(sortedBreed).stream().filter(Cell::isAlive).mapToDouble(Cell::getEfficiency).average().orElse(0.0)));
           Label avgSpeed_L      = new Label("Spd.: " + df.format(breedPopulations.get(sortedBreed).stream().filter(Cell::isAlive).mapToDouble(Cell::getSpeed)     .average().orElse(0.0)));
           Label avgBite_L       = new Label("Bite: " + df.format(breedPopulations.get(sortedBreed).stream().filter(Cell::isAlive).mapToDouble(Cell::getBiteSize)  .average().orElse(0.0)));
-
+//          Label avgMutationSpeed_L = new Label("Mut.: " + df.format(breedPopulations.get(sortedBreed).stream().filter(Cell::isAlive).mapToDouble(Cell::getMutationStepSizeMultiplier).average().orElse(0.0)));
           countLive_L.setTextFill(Color.web(sortedBreed.getColorCode()));
           applyStyleClass("bigText", countLive_L);
           applyStyleClass("accentText", avgZoC_L, avgEfficiency_L, avgSpeed_L, avgBite_L);
@@ -71,7 +71,9 @@ class Monitor {
           grid.add(countLive_L, 0, 0, 2, 1);
           grid.add(avgZoC_L   , 0, 1);  grid.add(avgEfficiency_L, 1, 1);
           grid.add(avgBite_L  , 0, 2);  grid.add(avgSpeed_L     , 1, 2);
-          grid.add(avgEne_PB  , 0, 3, 2, 1);
+//          grid.add(avgMutationSpeed_L, 0, 3, 2, 1);
+          grid.add(avgEne_PB  , 0, 4, 2, 1);
+
           infoPanel.getChildren().add(grid);
         });
   }

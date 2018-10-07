@@ -72,9 +72,9 @@ public class Engine {
 
     infoPanel.setPadding(new Insets(10.0));
     infoPanel.setSpacing(5.0);
-    infoPanel.setMinWidth(200.0);
-    infoPanel.setMaxWidth(250.0);
-    infoPanel.setMaxHeight(1000.0);
+//    infoPanel.setMinWidth(200.0);
+//    infoPanel.setMaxWidth(250.0);
+//    infoPanel.setMaxHeight(1000.0);
     infoPanel.getStyleClass().add("accentText");
     infoPanel.setAlignment(Pos.TOP_CENTER);
     infoPanel.setCache(true);
@@ -91,7 +91,6 @@ public class Engine {
             lifeThread.run();
           }
           canvas.getGraphicsContext2D().clearRect(0.0, 0.0, canvas.getWidth(), canvas.getHeight());
-//          paintGrid(world, canvas);
           paintWorld(world, canvas);
           world.getAllCells().forEach(cell -> paintCell(cell, canvas));
           if (world.getAllCells().stream().anyMatch(Cell::isAlive)) {

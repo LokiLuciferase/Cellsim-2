@@ -14,9 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.security.SecureRandom;
@@ -56,9 +54,6 @@ public class CellSIM extends Application {
     stats.setPadding(new Insets(5, 5, 5, 5));
     stats.setSpacing(20);
 
-
-    final Random GLOBAL_RANDOM    = new SecureRandom();
-
     VBox sp = new VBox(new Button("LEGEND"));
     sp.setPadding(new Insets(20));
     sp.setAlignment(Pos.TOP_CENTER);
@@ -82,6 +77,7 @@ public class CellSIM extends Application {
 
     Engine engine = new Engine(infoPanel, counter, liveCells, deadCells, totalCells, totalSugar);
     Canvas canvas = new Canvas((double) (engine.getWidth() * 5), (double) (engine.getHeight() * 5));
+    final Random GLOBAL_RANDOM = new SecureRandom();
 
     Button start = new Button("Start");
     start.setOnAction(e -> {
@@ -106,8 +102,6 @@ public class CellSIM extends Application {
       engine.generateWorld(true, canvas, sugarFactorSpinner.getValue());
       paintWorld(engine.getWorld(), canvas);
     });
-
-
     // STRUCTURING
     menuRow1.getChildren().addAll(
         counter,
@@ -130,15 +124,20 @@ public class CellSIM extends Application {
     engine.generateWorld(false, canvas, GLOBAL_RANDOM.nextInt(100));
 
     root.setTop(menu);
+
+    canvas.setScaleX(0.75);
+    canvas.setScaleY(0.75);
+    canvas.setTranslateX(-370);
+    canvas.setTranslateY(-235);
+
     root.setCenter(canvas);
     root.setLeft(infoPanel);
 
-    Scene mainScene = new Scene(root, 1000, 800);
+    Scene mainScene = new Scene(root, 1400, 850);
     mainScene.getStylesheets().add("style/style.css");
 
     primaryStage.setScene(mainScene);
-    primaryStage.setMaximized(true);
-    primaryStage.setFullScreen(true);
+    primaryStage.setResizable(false);
     primaryStage.show();
 
     // LISTENERS
