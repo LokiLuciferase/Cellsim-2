@@ -17,7 +17,7 @@ public class Vulture extends Carnivorous {
   private static final Image GFX = new Image("edu/lexaron/gfx/vulture.png");
 
   private Vulture(String id, int x, int y) {
-    super(id, x, y, 50.0, 10, 1.0, 0.33,  1.0, 1.05);
+    super(id, x, y, 50.0, 10, 1.0, 0.33,  10.0, 1.05);
   }
 
   /**
@@ -75,8 +75,8 @@ public class Vulture extends Carnivorous {
           Tile preyLocation = world.getWorld()[y][x];
           Cell prey         = preyLocation.getDeadCell();
           if (prey != null) {
-            setEnergy(getEnergy() + prey.getEnergy() + 10.0);
-            preyLocation.getSugar().setAmount(10.0); // todo Mirza : randomize?
+            setEnergy(getEnergy() + prey.getEnergy() + getBiteSize());
+            preyLocation.getSugar().setAmount(getBiteSize());
             preyLocation.setDeadCell(null);
             world.getEatenCorpses().add(prey);
             break loop;

@@ -52,7 +52,7 @@ public class Spider extends Carnivorous {
       for (int x = getX() - 1; x <= (getX() + 1); x++) {
         if (isValidLocation(world, x, y)) {
           Cell prey = world.getWorld()[y][x].getCell();
-          if (prey != null && !prey.equals(this) && prey.getBreed() != getBreed()) {
+          if (isValidPrey(prey)){
             prey.setEnergy(prey.getEnergy() / 2.0);
             setEnergy(getEnergy() + (prey.getEnergy() / 2.0));
             prey.die(world);

@@ -45,14 +45,22 @@ public class Leech extends Carnivorous {
   }
 
   @Override
+  public boolean isValidPrey(Cell prey) {
+    return (prey != null && !prey.equals(this));
+  }
+
+  @Override
   public void eat(World world) {
     if (getFood() != null && world.getWorld()[getFood().getY()][getFood().getX()].getCell() != null) {
-      world.getWorld()[getFood().getY()][getFood().getX()].getCell().setEnergy(world.getWorld()[getFood().getY()][getFood().getX()].getCell().getEnergy() - getBiteSize());
-      setEnergy(getEnergy() + getBiteSize());
-      if (world.getWorld()[getFood().getY()][getFood().getX()].getCell().getEnergy() < 0) {
-        world.getWorld()[getFood().getY()][getFood().getX()].getCell().die(world);
-        world.getWorld()[getFood().getY()][getFood().getX()].setDeadCell(world.getWorld()[getFood().getY()][getFood().getX()].getCell());
-        world.getWorld()[getFood().getY()][getFood().getX()].setCell(null);
+      Cell hostCell = world.getWorld()[getFood().getY()][getFood().getX()].getCell();
+      if (isValidPrey(hostCell)) {
+        hostCell.setEnergy(hostCell.getEnergy() - getBiteSize());
+        setEnergy(getEnergy() + getBiteSize());
+        if (hostCell.getEnergy() < 0) {
+          hostCell.die(world);
+          world.getWorld()[getFood().getY()][getFood().getX()].setDeadCell(hostCell);
+          world.getWorld()[getFood().getY()][getFood().getX()].setCell(null);
+        }
       }
     }
     else {

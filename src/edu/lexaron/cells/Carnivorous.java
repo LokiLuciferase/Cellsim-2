@@ -42,6 +42,10 @@ public abstract class Carnivorous extends Cell {
     }
   }
 
+  public boolean isValidPrey(Cell prey) {
+    return (prey != null && !prey.equals(this) && prey.getBreed() != getBreed());
+  }
+
   @Override
   public void lookForFood(World w) {
     resetFoodAndPath();
@@ -53,7 +57,7 @@ public abstract class Carnivorous extends Cell {
           if (isValidLocation(w, x , y)) {
             Cell  prey  = w.getWorld()[y][x].getCell();
             Trail trail = w.getWorld()[y][x].getTrail();
-            if (prey != null && prey.isAlive() && prey.getBreed() != getBreed()) {
+            if (isValidPrey(prey)) {
               setFood(prey.getX(), prey.getY());
               break loop;
             }

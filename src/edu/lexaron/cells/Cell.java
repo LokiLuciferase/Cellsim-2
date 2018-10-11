@@ -26,6 +26,9 @@ public abstract class Cell {
   private static final Random RANDOM    = new SecureRandom();
   private static final double BIRTH_REQ = 100.0;
   private static final int    OFFSPRING_LIMIT = 3;
+  private static final int idleDirectionSwitchDivisor = 50;
+  private static final double deleteriousMutationRate = 0.8;
+  private static final double mutationRate = 1;
   private static final List<Direction> directionList = new ArrayList<>(EnumSet.allOf(Direction.class));
 
   private final int               movement;
@@ -33,15 +36,13 @@ public abstract class Cell {
   private final Queue<Direction>  path;
 
   private boolean alive;
-  private int    x, y, vision, trailSize, offspring, range, oppositeRandomStep, lastRandomStep;
+  private int    x, y, vision, trailSize, offspring, oppositeRandomStep, lastRandomStep;
   private Direction idleDirection;
   private double energy;
   private double speed;
   private double efficiency;
   private double biteSize;
   private double mutationStepSizeMultiplier;
-  private double mutationRate = 1;  // TODO: always mutate something, for now. Maybe mutate all at same time?
-  private double deleteriousMutationRate = 0.8;
   private Location food = null;
 
   /**
@@ -69,8 +70,7 @@ public abstract class Cell {
     this.movement   = 1;
     this.speed      = speed;
     this.efficiency = efficiency;
-    this.idleDirection = directionList.get(RANDOM.nextInt(directionList.size() -1));
-    this.range      = 20; // TODO: make child class property
+    shuffleIdleDirection();
     if (energy > 0.0) {
       this.alive = true;
     }
@@ -134,6 +134,7 @@ public abstract class Cell {
     if (alive) {
       doHunt(world);
       if (path.isEmpty() && food == null) {
+        shuffleIdleDirection();
         move(world, idleDirection);
         randomStep(world);
       }
@@ -176,6 +177,14 @@ public abstract class Cell {
    */
   public final void setY(int y) {
     this.y = y;
+  }
+
+  public final Direction getIdleDirection() { return idleDirection; }
+
+  public final void shuffleIdleDirection() {
+    if (idleDirection == null || (RANDOM.nextInt(idleDirectionSwitchDivisor) == 0)) {
+      idleDirection = directionList.get(RANDOM.nextInt(directionList.size() -1));
+    }
   }
 
   /**
