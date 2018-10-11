@@ -134,7 +134,7 @@ public abstract class Cell {
     if (alive) {
       doHunt(world);
       if (path.isEmpty() && food == null) {
-        shuffleIdleDirection();
+        behave(world);
         move(world, idleDirection);
         randomStep(world);
       }
@@ -249,13 +249,12 @@ public abstract class Cell {
     return RANDOM;
   }
 
+  public void behave(World world) { shuffleIdleDirection(); }
+
   void findPathTo(Location target) {
     if (target != null) {
       int difY = target.getY() - y;
       int difX = target.getX() - x;
-//      System.out.println("Cell: " + x + "," + y);
-//      System.out.println("Food: " + target.getX() + "," + target.getY());
-//      System.out.println("dist: " + difX + "," + difY);
       if (difX > 0) {
         for (int i = 0; i < Math.abs(difX); i++) {
           path.offer(Direction.RIGHT);
