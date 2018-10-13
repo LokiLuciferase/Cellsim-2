@@ -88,7 +88,7 @@ public class Vulture extends Carnivorous {
           Tile preyLocation = world.getWorld()[y][x];
           Cell prey         = preyLocation.getDeadCell();
           if (prey != null) {
-            setEnergy(getEnergy() + prey.getEnergy() > 0 ? prey.getEnergy() + getBiteSize() : getBiteSize());
+            setEnergy(getEnergy() + (prey.getEnergy() > 0 ? prey.getEnergy() + getBiteSize() : getBiteSize()));
             preyLocation.setDeadCell(null);
             if (RANDOM.nextInt(SUGAR_SPILL_PROB_DIVISOR) == 0) {
               spillSugar(world);

@@ -124,6 +124,7 @@ public abstract class Cell {
         energy /= 3.0;
       }
       else {
+        offspring += 1;
         setEnergy(BIRTH_REQ);
       }
     }
