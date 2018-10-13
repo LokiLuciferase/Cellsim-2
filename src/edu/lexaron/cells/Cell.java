@@ -368,21 +368,20 @@ public abstract class Cell {
     return path;
   }
 
+  // TODO: make this wrap around world
   Location findBirthplace(World w) {
     Location birthplace = null;
     boolean found = false;
     int tryCounter = 0;
       loop:
     while (!found) {
+      tryCounter += 1;
       int rx = RANDOM.nextInt(((x + vision) - (x - vision)) + 1) + (x - vision);
       int ry = RANDOM.nextInt(((y + vision) - (y - vision)) + 1) + (y - vision);
       if (!(ry < 0 || rx < 0 || ry >= w.getHeight() || rx >= w.getWidth())) {
         if (w.getWorld()[ry][rx].getCell() == null && w.getWorld()[ry][rx].getDeadCell() == null) {
           birthplace = new Location(rx, ry);
           found = true;
-        }
-        else {
-          tryCounter += 1;
         }
       }
       if (tryCounter >= MAX_BIRTH_TRY) {
