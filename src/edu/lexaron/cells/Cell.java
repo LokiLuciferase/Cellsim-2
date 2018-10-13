@@ -25,7 +25,7 @@ public abstract class Cell {
 
   protected static final Random RANDOM    = new SecureRandom();
   private static final double BIRTH_REQ = 100.0;
-  private static final int MAX_BIRTH_TRY = 30;
+  private static final int MAX_BIRTH_TRY = 3;
   private static final int OFFSPRING_LIMIT = 3;
   private static final int IDLE_DIRECTION_SWITCH_DIVISOR = 50;
   private static final double DELETERIOUS_MUTATION_RATE = 0.9;
@@ -124,7 +124,6 @@ public abstract class Cell {
         energy /= 3.0;
       }
       else {
-        System.out.println("Dying from overpopulation.");
         die(world);
       }
     }
@@ -385,7 +384,7 @@ public abstract class Cell {
         }
       }
       if (tryCounter >= MAX_BIRTH_TRY) {
-        break loop;
+        return null;
       }
     }
     return birthplace;
