@@ -12,7 +12,7 @@ public enum Breed {
   SPIDER("#ff0000"),
   TREE("#ffffff"),
   VULTURE("#33ffff"),
-  WEED("#11ffff");
+  WEED("#8b4513");
 
   private final String colorCode;
 

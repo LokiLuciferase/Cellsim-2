@@ -8,10 +8,9 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 public class Weed extends Plant {
-  private static final Image GFX = new Image("edu/lexaron/gfx/tree.png");
+  private static final Image GFX = new Image("edu/lexaron/gfx/weed.png");
   private static final int MAX_SEED_RADIUS = 10;
   private static final int MAX_SEED_SUGAR_PER_TILE = 10;
-  private static final double DAMAGE_RESISTANCE_MULTIPLIER = 0.8;
 
   /**
    * Creates a new default {@link Weed} at a random location in the provided {@link World}.
@@ -24,7 +23,7 @@ public class Weed extends Plant {
 
   @SuppressWarnings("MagicNumber")
   private Weed(String id, int x, int y) {
-    super(id, x, y, 20.0, 3, 1.0, 0.1, 0.2, 1.05);
+    super(id, x, y, 80.0, 10, 1.0, 1, 0.2, 1.05);
   }
 
   @Override
@@ -82,14 +81,4 @@ public class Weed extends Plant {
     }
     super.die(world);
   }
-
-  @Override
-  public void setEnergy(double energy, Breed... settingBreed){
-    if ((settingBreed.length == 1 && settingBreed[0] == getBreed()) || energy >= getEnergy()){
-      super.setEnergy(energy);
-    } else {
-      super.setEnergy(energy * DAMAGE_RESISTANCE_MULTIPLIER);
-    }
-  }
-
 }

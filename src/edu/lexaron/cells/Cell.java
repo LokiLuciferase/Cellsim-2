@@ -26,11 +26,11 @@ public abstract class Cell {
   protected static final Random RANDOM    = new SecureRandom();
   private static final double BIRTH_REQ = 100.0;
   private static final int MAX_BIRTH_TRY = 100;
-  private static final int    OFFSPRING_LIMIT = 3;
-  private static final int idleDirectionSwitchDivisor = 50;
-  private static final double deleteriousMutationRate = 0.5;
-  private static final double mutationRate = 1;
-  private static final List<Direction> directionList = new ArrayList<>(EnumSet.allOf(Direction.class));
+  private static final int OFFSPRING_LIMIT = 3;
+  private static final int IDLE_DIRECTION_SWITCH_DIVISOR = 50;
+  private static final double DELETERIOUS_MUTATION_RATE = 0.7;
+  private static final double MUTATION_RATE = 1;
+  private static final List<Direction> DIRECTION_LIST = new ArrayList<>(EnumSet.allOf(Direction.class));
 
   private final int               movement;
   private final String            geneCode;
@@ -116,7 +116,7 @@ public abstract class Cell {
       if (birthPlace != null) {
         Cell child = doGiveBirth(birthPlace.getX(), birthPlace.getY());
         child.inheritFrom(this);
-        if ((double) RANDOM.nextInt(100) / 100 <= mutationRate){
+        if ((double) RANDOM.nextInt(100) / 100 <= MUTATION_RATE){
           child.evolve();
         }
         world.getNewBornCells().add(child);
@@ -189,8 +189,8 @@ public abstract class Cell {
   public final Direction getIdleDirection() { return idleDirection; }
 
   public final void shuffleIdleDirection() {
-    if (idleDirection == null || (RANDOM.nextInt(idleDirectionSwitchDivisor) == 0)) {
-      idleDirection = directionList.get(RANDOM.nextInt(directionList.size() -1));
+    if (idleDirection == null || (RANDOM.nextInt(IDLE_DIRECTION_SWITCH_DIVISOR) == 0)) {
+      idleDirection = DIRECTION_LIST.get(RANDOM.nextInt(DIRECTION_LIST.size() -1));
     }
   }
 
@@ -307,13 +307,13 @@ public abstract class Cell {
 
   // Take a random step; avoid opposite direction of last step
   void randomStep(World w) {
-    int roll = RANDOM.nextInt(directionList.size());
+    int roll = RANDOM.nextInt(DIRECTION_LIST.size());
     while (roll == oppositeRandomStep && roll == lastRandomStep) {
-      roll = RANDOM.nextInt(directionList.size());
+      roll = RANDOM.nextInt(DIRECTION_LIST.size());
     }
-    oppositeRandomStep = directionList.size() - 1 - roll;
+    oppositeRandomStep = DIRECTION_LIST.size() - 1 - roll;
     lastRandomStep = roll;
-    move(w, directionList.get(roll));
+    move(w, DIRECTION_LIST.get(roll));
   }
 
   @SuppressWarnings ({"ImplicitNumericConversion", "ProhibitedExceptionCaught"})
@@ -400,7 +400,7 @@ public abstract class Cell {
   }
 
   private void evolve() {
-    Boolean isDeleterious = RANDOM.nextInt(10) < 10 * deleteriousMutationRate;
+    Boolean isDeleterious = RANDOM.nextInt(10) < 10 * DELETERIOUS_MUTATION_RATE;
     double fuzzFactor = RANDOM.nextGaussian();
     if (fuzzFactor < 0) {fuzzFactor *= -1;}
     fuzzFactor += 1;
@@ -450,7 +450,7 @@ public abstract class Cell {
     world.getWorld()[y][x].setCell(null);
   }
 
-  // TODO: let vision evolve in other increments dependent on mutationRate
+  // TODO: let vision evolve in other increments dependent on MUTATION_RATE
   private void mutateVision(Boolean isDeleterious, double fuzzFactor) {
     double baseVisionChange = 1;
     int cumulativeVisionChange = (int) Math.round(baseVisionChange * mutationStepSizeMultiplier * fuzzFactor);

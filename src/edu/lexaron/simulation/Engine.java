@@ -144,6 +144,7 @@ public class Engine {
     world.getNewBornCells().add(new Spider(world));
     world.getNewBornCells().add(new Tree(world));
     world.getNewBornCells().add(new Vulture(world));
+    world.getNewBornCells().add(new Weed(world));
   }
 
 }

@@ -18,11 +18,11 @@ import java.util.ArrayList;
 public class Vulture extends Carnivorous {
   private static final Image GFX = new Image("edu/lexaron/gfx/vulture.png");
   private static final int MAX_SUGAR_SPILL_RADIUS = 10;
-  private static final int MAX_SUGAR_SPILL_PER_TILE = 1;  //FIXME: disabled for now
+  private static final int MAX_SUGAR_SPILL_PER_TILE = 1;
   private static final int SUGAR_SPILL_PROB_DIVISOR = 5;
 
   private Vulture(String id, int x, int y) {
-    super(id, x, y, 50.0, 10, 1.0, 0.33,  7.0, 1.05);
+    super(id, x, y, 50.0, 10, 1.0, 0.5,  7.0, 1.05);
   }
 
   /**

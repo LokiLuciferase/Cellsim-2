@@ -46,11 +46,6 @@ public class Spider extends Carnivorous {
   }
 
   @Override
-  public boolean isValidPrey(Cell prey){
-    return (super.isValidPrey(prey) && prey.getBreed() != Breed.TREE);
-  }
-
-  @Override
   public void eat(World world) {
         loop:
     for (int y = getY() - 1; y <= (getY() + 1); y++) {
