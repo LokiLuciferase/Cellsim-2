@@ -8,6 +8,7 @@ package edu.lexaron.world;
 import edu.lexaron.cells.Cell;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -17,6 +18,7 @@ import java.util.Set;
  */
 public class World {
 
+  private static final int MAX_SUGAR_PER_TILE = 20;
   private final int height;
   private final int width;
   private final Random random = new SecureRandom();
@@ -45,11 +47,7 @@ public class World {
     world = new Tile[height][width];
 
     int sugarTiles = (int) (((width * height)) * (sugarFactor / 100));
-    System.out.println(""
-        + "Setup: "
-        + width + "x" + height + ", "
-        + "SF=" + sugarFactor + ", "
-        + "ST=" + sugarTiles);
+    System.out.println(String.format("Setup:%sx%s, SF=%s, ST=%s", width, height, sugarFactor, sugarTiles));
     int tileID = 1;
     for (int i = 0; i < width; i++) {
       for (int j = 0; j < height; j++) {
@@ -57,15 +55,15 @@ public class World {
         tileID++;
       }
     }
-    int x = random.nextInt(width);
-    int y = random.nextInt(height);
+    int x;
+    int y;
     for (int i = 0; i < sugarTiles; i++) {
       do {
         x = random.nextInt(width);
         y = random.nextInt(height);
       }
       while (hasSugar(y, x));
-      world[y][x].setSugar(new Sugar(x, y, random.nextInt(21)));
+      world[y][x].setSugar(new Sugar(x, y, random.nextInt(MAX_SUGAR_PER_TILE + 1)));
     }
     System.out.println("Done generating world!");
 
@@ -79,27 +77,26 @@ public class World {
    */
   public boolean hasSugar(int x, int y) {
     return world[x][y].getSugar().getAmount() != 0;
-
   }
 
-  /**
-   *
-   */
-  public void newFood() {
-    int x, y;
-//        x = r.nextInt(((width / 4) * 3) - (width / 4)) + (width / 4);
-//        y = r.nextInt(((height / 4) * 3) - (height / 4)) + (height / 4);
-    x = random.nextInt(width - 2) + 1;
-    y = random.nextInt(height - 2) + 1;
-    if (world[y][x].getSugar().getAmount() <= 0) {
-      world[y][x].getSugar().setAmount(random.nextInt(9) + 1);
-    }
-    else {
-      //if (world[y][x].getSugar().getAmount() <= 18)
-      world[y][x].getSugar().setAmount(world[y][x].getSugar().getAmount() + 2);
-    }
-
-  }
+//  /**
+//   *
+//   */
+//  public void newFood() {
+//    int x, y;
+////        x = r.nextInt(((width / 4) * 3) - (width / 4)) + (width / 4);
+////        y = r.nextInt(((height / 4) * 3) - (height / 4)) + (height / 4);
+//    x = random.nextInt(width - 2) + 1;
+//    y = random.nextInt(height - 2) + 1;
+//    if (world[y][x].getSugar().getAmount() <= 0) {
+//      world[y][x].getSugar().setAmount(random.nextInt(9) + 1);
+//    }
+//    else {
+//      //if (world[y][x].getSugar().getAmount() <= 18)
+//      world[y][x].getSugar().setAmount(world[y][x].getSugar().getAmount() + 2);
+//    }
+//
+//  }
 
   /**
    * @return
@@ -120,6 +117,25 @@ public class World {
    */
   public int getWidth() {
     return width;
+  }
+
+  /**
+   *
+   * @param x
+   * @param y
+   * @param radius
+   * @return
+   */
+  public ArrayList<Tile> getTileEnvironment(int x, int y, int radius) {
+    ArrayList<Tile> surroundingTiles = new ArrayList<>();
+    for (int i = x - radius; i < x + radius; i++){
+      for (int j = y - radius; j < y + radius; j++){
+        int validX = i >= getWidth()  ? 0 - (getWidth() -1 - i) : i < 0 ? getWidth() -1 + i : i;
+        int validY = j >= getHeight()  ? 0 - (getHeight() - 1 - j) : j < 0 ? getHeight() -1 + j: j;
+        surroundingTiles.add(world[validY][validX]);
+      }
+    }
+    return surroundingTiles;
   }
 
   /**

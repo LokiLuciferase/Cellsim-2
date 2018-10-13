@@ -14,6 +14,7 @@ import edu.lexaron.world.World;
 @SuppressWarnings ("MagicNumber")
 abstract class Plant extends Cell {
   private static final int VISION_MODIFIER = 5;
+  private static final double GENERATED_FOOD_AMOUNT = 3.0;
 
   /**
    * Creates a new {@link Cell} based on the provided parameters.
@@ -50,7 +51,7 @@ abstract class Plant extends Cell {
         setFood(rx, ry);
       }
       else if (getRandom().nextInt(3) == 2) {
-        world.getWorld()[ry][rx].getSugar().setAmount(3.0);
+        world.getWorld()[ry][rx].getSugar().setAmount(GENERATED_FOOD_AMOUNT);
       }
     }
   }

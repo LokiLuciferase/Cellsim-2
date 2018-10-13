@@ -23,11 +23,12 @@ import java.util.*;
  */
 public abstract class Cell {
 
-  private static final Random RANDOM    = new SecureRandom();
+  protected static final Random RANDOM    = new SecureRandom();
   private static final double BIRTH_REQ = 100.0;
+  private static final int MAX_BIRTH_TRY = 100;
   private static final int    OFFSPRING_LIMIT = 3;
   private static final int idleDirectionSwitchDivisor = 50;
-  private static final double deleteriousMutationRate = 0.8;
+  private static final double deleteriousMutationRate = 0.5;
   private static final double mutationRate = 1;
   private static final List<Direction> directionList = new ArrayList<>(EnumSet.allOf(Direction.class));
 
@@ -112,14 +113,19 @@ public abstract class Cell {
   private void tryBirth(World world) {
     if (energy >= BIRTH_REQ) {
       Location birthPlace = findBirthplace(world);
-      Cell child = doGiveBirth(birthPlace.getX(), birthPlace.getY());
-      child.inheritFrom(this);
-      if ((double) RANDOM.nextInt(100) / 100 <= mutationRate){
-        child.evolve();
+      if (birthPlace != null) {
+        Cell child = doGiveBirth(birthPlace.getX(), birthPlace.getY());
+        child.inheritFrom(this);
+        if ((double) RANDOM.nextInt(100) / 100 <= mutationRate){
+          child.evolve();
+        }
+        world.getNewBornCells().add(child);
+        offspring += 1;
+        energy /= 3.0;
       }
-      world.getNewBornCells().add(child);
-      offspring += 1;
-      energy /= 3.0;
+      else {
+        setEnergy(BIRTH_REQ);
+      }
     }
   }
 
@@ -347,7 +353,7 @@ public abstract class Cell {
     resetFoodAndPath();
   }
 
-  void setEnergy(double energy) {
+  void setEnergy(double energy, Breed... settingBreed) {
     this.energy = energy;
   }
 
@@ -361,9 +367,10 @@ public abstract class Cell {
     return path;
   }
 
-  Location findBirthplace(World w) { // todo Mirza : can cause app to hang if no suitable place is available
+  Location findBirthplace(World w) {
     Location birthplace = null;
     boolean found = false;
+    int tryCounter = 0;
     while (!found) {
       int rx = RANDOM.nextInt(((x + vision) - (x - vision)) + 1) + (x - vision);
       int ry = RANDOM.nextInt(((y + vision) - (y - vision)) + 1) + (y - vision);
@@ -372,6 +379,12 @@ public abstract class Cell {
           birthplace = new Location(rx, ry);
           found = true;
         }
+        else {
+          tryCounter += 1;
+        }
+      }
+      if (tryCounter >= MAX_BIRTH_TRY) {
+        break;
       }
     }
     return birthplace;
@@ -430,7 +443,7 @@ public abstract class Cell {
     }
   }
 
-  void die(World world) {
+  protected void die(World world) {
     alive = false;
     world.getWorld()[y][x].setDeadCell(this);
     world.getWorld()[y][x].setCell(null);
