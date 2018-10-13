@@ -25,10 +25,10 @@ public abstract class Cell {
 
   protected static final Random RANDOM    = new SecureRandom();
   private static final double BIRTH_REQ = 100.0;
-  private static final int MAX_BIRTH_TRY = 100;
+  private static final int MAX_BIRTH_TRY = 30;
   private static final int OFFSPRING_LIMIT = 3;
   private static final int IDLE_DIRECTION_SWITCH_DIVISOR = 50;
-  private static final double DELETERIOUS_MUTATION_RATE = 0.7;
+  private static final double DELETERIOUS_MUTATION_RATE = 0.9;
   private static final double MUTATION_RATE = 1;
   private static final List<Direction> DIRECTION_LIST = new ArrayList<>(EnumSet.allOf(Direction.class));
 
@@ -124,8 +124,8 @@ public abstract class Cell {
         energy /= 3.0;
       }
       else {
-        offspring += 1;
-        setEnergy(BIRTH_REQ);
+        System.out.println("Dying from overpopulation.");
+        die(world);
       }
     }
   }
@@ -372,6 +372,7 @@ public abstract class Cell {
     Location birthplace = null;
     boolean found = false;
     int tryCounter = 0;
+      loop:
     while (!found) {
       int rx = RANDOM.nextInt(((x + vision) - (x - vision)) + 1) + (x - vision);
       int ry = RANDOM.nextInt(((y + vision) - (y - vision)) + 1) + (y - vision);
@@ -385,7 +386,7 @@ public abstract class Cell {
         }
       }
       if (tryCounter >= MAX_BIRTH_TRY) {
-        break;
+        break loop;
       }
     }
     return birthplace;
