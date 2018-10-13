@@ -46,7 +46,7 @@ public class Leech extends Carnivorous {
 
   @Override
   public boolean isValidPrey(Cell prey) {
-    return (prey != null && !prey.equals(this));
+    return (prey != null && !prey.equals(this) && prey.getBreed() != getBreed());
   }
 
   @Override
